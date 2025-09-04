@@ -15,3 +15,6 @@ npm-debug.log
 
 # output do analyzer utilizado no docs
 analysis.json
+
+# artefato npm
+polymer-polymer-*.tgz
