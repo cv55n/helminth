@@ -1,0 +1,17 @@
+# dependências
+bower_components
+node_modules
+
+# ouput compilado
+dist
+
+# ides
+.idea
+.vscode
+
+# misc
+.DS_Store
+npm-debug.log
+
+# output do analyzer utilizado no docs
+analysis.json
