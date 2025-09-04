@@ -1,6 +1,6 @@
+const { Transform } = require('stream');
 const dom5 = require('dom5');
 const parse5 = require('parse5');
-const {Transform} = require('stream');
 
 const p = dom5.predicates;
 
