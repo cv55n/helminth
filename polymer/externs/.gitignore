@@ -1,0 +1,8 @@
+# todo: ignorar todos os arquivos aqui uma vez que possam
+# ser gerados
+#
+# *
+
+!.gitignore
+!.npmignore
+closure-types.js
