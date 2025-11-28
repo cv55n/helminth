@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <meta charset="UTF-8">
+
+        <script src="../../node_modules/@webcomponents/webcomponentsjs/webcomponents-bundle.js"></script>
+        <script src="../../node_modules/wct-browser-legacy/browser.js"></script>
+
+        <script type="module" src="../../polymer-legacy.js"></script>
+    </head>
+
+    <body>
+        <custom-style>
+            <style is="custom-style">
+                x-input {
+                    border: 4px solid red;
+
+                    @apply --cs-blue;
+                }
+            </style>
+        </custom-style>
+
+        <template id="late">
+            <custom-style>
+                <style is="custom-style">
+                    html {
+                        --cs-blue {
+                            border: 8px solid blue;
+                        }
+                    }
+                </style>
+            </custom-style>
+        </template>
+
+        <x-input id="input"></x-input>
+
+        <script type="module">
+            import { Polymer } from '../../polymer-legacy.js';
+            import { afterNextRender } from '../../lib/utils/render-status.js';
+
+            /* input global */
+            
+            suite('definição de propriedade late custom-style', function() {
+                test('propriedades definidas aplicadas em custom-style', function(done) {
+                    Polymer({
+                        is: 'x-input'
+                    });
+
+                    var template = document.querySelector('template#late');
+
+                    document.body.appendChild(document.importNode(template.content, true));
+
+                    // esperar 2 rodadas de `afternextrender` como `<custom-style>`
+                    afterNextRender(null, function() {
+                        afterNextRender(null, function() {
+                            assertComputed(input, '8px');
+
+                            done();
+                        });
+                    });
+                });
+            });
+
+            function assertComputed(element, value, property, pseudo) {
+                var computed = getComputedStyle(element, pseudo);
+
+                property = property || 'border-top-width';
+
+                assert.equal(computed[property], value, 'estilo computado errado para ' + property);
+            }
+        </script>
+    </body>
+</html>
